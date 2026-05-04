@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+	
+	
+	<!-- GREETING AND NAME CAPTURE -->
+	
+	<category>
+	    <pattern>HELLO</pattern>
+	    <template>
+	        Hi, I'm CareerAdvisor. I help graduating computer science students figure out which computing career might fit them best. What's your name?
+	    </template>
+	</category>
+	
+	<category>
+	    <pattern>HI</pattern>
+	    <template><srai>HELLO</srai></template>
+	</category>
+	
+	<category>
+        <pattern>HEY</pattern>
+        <template><srai>HELLO</srai></template>
+    </category>
+
+    <category>
+        <pattern>GOOD MORNING</pattern>
+        <template><srai>HELLO</srai></template>
+    </category>
+    
+    <category>
+        <pattern>MY NAME IS *</pattern>
+        <template>
+            Nice to meet you, <set name="username"><star/></set>. I'll ask a few quick questions and recommend a computing career that fits your interests. Ready when you are.
+            <button>
+                <text>Let's start</text>
+                <postback>START</postback>
+            </button>
+        </template>
+    </category>
+    
+    <category>
+        <pattern>I AM *</pattern>
+        <template><srai>MY NAME IS <star/></srai></template>
+    </category>
+    
+    <category>
+        <pattern>IM *</pattern>
+        <template><srai>MY NAME IS <star/></srai></template>
+    </category>
+
+    <category>
+        <pattern>ITS *</pattern>
+        <template><srai>MY NAME IS <star/></srai></template>
+    </category>
+    
+    <!-- Fallback: if the user just types their name with no "my name is" prefix, and the previous bot message was the name prompt, treat it as a name. -->
+    
+    <category>
+        <pattern>*</pattern>
+        <that>WHAT IS YOUR NAME</that>
+        <template><srai>MY NAME IS <star/></srai></template>
+    </category>
+    
+    
+    <!-- QUESTION 1 -->
+    
+    <category>
+        <pattern>START</pattern>
+        <template>
+            Great, <get name="username"/>. Question 1 of 3.
+            Do you enjoy designing visual, interactive experiences that users see and touch, or do you prefer working with the systems, data, and security underneath?
+            <button>
+                <text>Visible to users</text>
+                <postback>VISIBLE</postback>
+            </button>
+            <button>
+                <text>Underneath the hood</text>
+                <postback>UNDERNEATH</postback>
+            </button>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YES LETS START</pattern>
+        <template><srai>START</srai></template>
+    </category>
+
+    <category>
+        <pattern>BEGIN</pattern>
+        <template><srai>START</srai></template>
+    </category>
+    
+    
+    <!-- QUESTION 2A -->
+    
+    <category>
+        <pattern>VISIBLE</pattern>
+        <template>
+            Question 2 of 3.
+            Are you more drawn to crafting the interface and user experience itself, or building the full application logic that powers it?
+            <button>
+                <text>Interface and UX</text>
+                <postback>INTERFACE UX</postback>
+            </button>
+            <button>
+                <text>Full app logic</text>
+                <postback>FULL APP</postback>
+            </button>
+        </template>
+    </category>
+    
+    <!-- QUESTION 2B -->
+    
+    <category>
+        <pattern>UNDERNEATH</pattern>
+        <template>
+            Question 2 of 3.
+            Are you more excited by finding patterns in large datasets, or by the infrastructure and operations that keep systems running?
+            <button>
+                <text>Patterns in data</text>
+                <postback>DATA PATTERNS</postback>
+            </button>
+            <button>
+                <text>Infrastructure</text>
+                <postback>INFRASTRUCTURE</postback>
+            </button>
+        </template>
+    </category>
+    
+    
+    <!-- QUESTION 3 -->
+    
+    <category>
+        <pattern>INFRASTRUCTURE</pattern>
+        <template>
+            Question 3 of 3.
+            Are you motivated more by defending systems from threats and finding vulnerabilities, or by designing and scaling the infrastructure that runs applications in the cloud?
+            <button>
+                <text>Defending systems</text>
+                <postback>DEFEND SECURITY</postback>
+            </button>
+            <button>
+                <text>Designing cloud infra</text>
+                <postback>CLOUD SCALE</postback>
+            </button>
+        </template>
+    </category>
+    
+    
+    <!-- RECOMMENDATIONS -->
+
+    <category>
+        <pattern>INTERFACE UX</pattern>
+        <template>
+            Based on your answers, <get name="username"/>, I recommend exploring a career as a UX or Front-End Engineer. Front-end engineers craft what users actually see and interact with, translating design into clean, responsive interfaces that feel effortless. If you care about details, accessibility, and the difference between a clunky app and a delightful one, this is your fit.
+            <button>
+                <text>Learn more on O*NET</text>
+                <url>https://www.onetonline.org/link/summary/15-1254.00</url>
+            </button>
+            <button>
+                <text>Start over</text>
+                <postback>RESTART</postback>
+            </button>
+        </template>
+    </category>
+
+    <category>
+        <pattern>FULL APP</pattern>
+        <template>
+            Based on your answers, <get name="username"/>, I recommend exploring a career as a Software Developer. Software developers build the applications people rely on every day, from mobile apps to enterprise platforms. You'll spend your time turning ideas into working code, debugging tricky problems, and shipping features users will actually touch.
+            <button>
+                <text>Learn more on O*NET</text>
+                <url>https://www.onetonline.org/link/summary/15-1252.00</url>
+            </button>
+            <button>
+                <text>Start over</text>
+                <postback>RESTART</postback>
+            </button>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DATA PATTERNS</pattern>
+        <template>
+            Based on your answers, <get name="username"/>, I recommend exploring a career as a Data Scientist. Data scientists turn raw information into insight. They build models, spot patterns, and help organizations make smarter decisions. If you like math, statistics, and the moment a chart tells you something nobody else noticed, this is the path.
+            <button>
+                <text>Learn more on O*NET</text>
+                <url>https://www.onetonline.org/link/summary/15-2051.00</url>
+            </button>
+            <button>
+                <text>Start over</text>
+                <postback>RESTART</postback>
+            </button>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DEFEND SECURITY</pattern>
+        <template>
+            Based on your answers, <get name="username"/>, I recommend exploring a career as a Cybersecurity Analyst. Cybersecurity analysts defend organizations against attackers, monitoring systems for threats and hunting down vulnerabilities before someone else does. You'll think like an adversary, build defenses, and protect the data that matters most.
+            <button>
+                <text>Learn more on O*NET</text>
+                <url>https://www.onetonline.org/link/summary/15-1212.00</url>
+            </button>
+            <button>
+                <text>Start over</text>
+                <postback>RESTART</postback>
+            </button>
+        </template>
+    </category>
+
+    <category>
+        <pattern>CLOUD SCALE</pattern>
+        <template>
+            Based on your answers, <get name="username"/>, I recommend exploring a career as a Cloud Engineer. Cloud engineers design and scale the infrastructure that runs modern software. They automate deployments, manage servers, and make sure applications stay fast and reliable under any load. You'll work with platforms like AWS, Azure, and GCP.
+            <button>
+                <text>Learn more on O*NET</text>
+                <url>https://www.onetonline.org/link/summary/15-1299.08</url>
+            </button>
+            <button>
+                <text>Start over</text>
+                <postback>RESTART</postback>
+            </button>
+        </template>
+    </category>
+
+
+    <!-- RESTART -->
+
+    <category>
+        <pattern>RESTART</pattern>
+        <template><srai>START</srai></template>
+    </category>
+
+    <category>
+        <pattern>START OVER</pattern>
+        <template><srai>START</srai></template>
+    </category>
+
+    <category>
+        <pattern>TRY AGAIN</pattern>
+        <template><srai>START</srai></template>
+    </category>
+
+
+    <!-- FALLBACK -->
+
+    <category>
+        <pattern>*</pattern>
+        <template>
+            Sorry, <get name="username"/>, I didn't catch that. Try clicking one of the buttons, or say "start" to begin again.
+            <button>
+                <text>Start</text>
+                <postback>START</postback>
+            </button>
+        </template>
+    </category>
+
+	
+	
+</aiml>
